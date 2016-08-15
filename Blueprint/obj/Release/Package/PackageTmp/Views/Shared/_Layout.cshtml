@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="868674296578792" />
+    <meta property="og:url" content="http://toeicplus.somee.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anh ngữ hiệu quả" />
+    <title>Anh ngữ hiệu quả</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <header>
+        <div class="wrapperin">
+            <div class="logo">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/logo.png" alt="" />
+                </a>
+            </div>
+            <div class="logo-menu">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" class="active">
+                            <img src="~/Images/home.png" alt="" />
+                        </a>
+                    </li>
+                    <li>|</li>
+                    <li>
+                        <a href="@Url.Action("About", "Home")">Giới thiệu</a>
+                    </li>
+                    <li>|</li>
+                    <li>
+                        <a href="@Url.Action("Test", "Home")">Làm kiểm tra</a>
+                    </li>
+                    <li class="login">|</li>
+                    <li class="login">
+                        <a href="@Url.Action("Login", "Admin")">Đăng nhập</a>
+                    </li>
+                    <li class="logout">|</li>
+                    <li class="logout">
+                        <a href="@Url.Action("Logout", "Admin")">Đăng xuất</a>
+                    </li>
+                </ul>
+                <div class="enquirenow-bg">
+                    <a href="@Url.Action("Enquire", "Home")">Ghi danh</a>
+                </div>
+            </div>
+            <!--Icon menu on mobile-->
+            <div class="logo-menu-mobile">
+                <div class="enquirelink">
+                    <a href="@Url.Action("Enquire", "Home")">Ghi danh</a>
+                </div>
+                <div>
+                    <i class="aside-menu-toggler show"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Aside menu on mobile-->
+    <div class="aside-menu">
+        <i class="aside-close"></i>
+        <ul>
+            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li><a href="@Url.Action("About","Home")">Giới thiệu</a></li>
+            <li><a href="@Url.Action("Course", "Home")">Khóa học</a></li>
+            <li><a href="@Url.Action("Index","Home")">Học phí</a></li>
+            <li><a href="@Url.Action("Test","Home")">Làm kiểm tra</a></li>
+            <li><a href="@Url.Action("Enquire", "Home")">Ghi danh</a></li>
+            <li class="login"><a href="@Url.Action("Login", "Admin")">Đăng nhập</a></li>
+        </ul>
+
+        <div class="admin">
+            <ul>
+                <li><a href="@Url.Action("Index","Admin")">Quản trị</a></li>
+                <li><a href="@Url.Action("Courses", "Admin")">Khóa học</a></li>
+                <li><a href="@Url.Action("Test", "Admin")">Bài kiểm tra</a></li>
+                <li><a href="@Url.Action("Client", "Admin")">Khách hàng</a></li>
+                <li><a href="@Url.Action("User", "Admin")">Tài khoản</a></li>
+                <li class="logout"><a href="@Url.Action("Logout", "Admin")">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="floating_menu">
+        <div class="wrapperin">
+            <div style="width:450px;margin:auto">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Course", "Home", new { @title = ""})">Khóa học</a>
+                        <ul>
+                            <div class="navarrow">
+                                <img src="~/Images/arrow-top.png" />
+                            </div>
+                            @Html.Action("RenderCourses","Home")
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Fees", "Home")">Học phí</a>
+                    </li>
+                    <li class="admin">
+                        <a href="@Url.Action("Index", "Admin")">Quản trị</a>
+                        <ul>
+                            <div class="navarrow">
+                                <img src="~/Images/arrow-top.png" />
+                            </div>
+                            <li><a href="@Url.Action("Courses", "Admin")">Khóa học</a></li>
+                            <li><a href="@Url.Action("Test", "Admin")">Bài kiểm tra</a></li>
+                            <li><a href="@Url.Action("Client", "Admin")">Khách hàng</a></li>
+                            <li><a href="@Url.Action("User", "Admin")">Tài khoản</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        .modal-form {
+            opacity: 0;
+            position: absolute;
+            padding: 20px;
+            top: 60px;
+            left: 50px;
+            width: 300px;
+            height: 355px;
+            background-color: white;
+            border: 2px outset #3498DB;
+            border-radius: 8px;
+            box-shadow: 0px 0px 16px 0px;
+            overflow: hidden;
+            z-index: 5;
+            transition: all 0.3s;
+        }
+
+        .modal-form-close {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+        }
+
+            .modal-form-close:hover {
+                opacity: 1;
+            }
+
+            .modal-form-close:before, .modal-form-close:after {
+                position: absolute;
+                left: 15px;
+                content: ' ';
+                height: 23px;
+                width: 2px;
+                background-color: #333;
+            }
+
+            .modal-form-close:before {
+                transform: rotate(45deg);
+            }
+
+            .modal-form-close:after {
+                transform: rotate(-45deg);
+            }
+
+        .modal-form input, .modal-form select {
+            width: 100%;
+            height: 45px;
+            border-radius: 5px;
+            margin-top: 7px;
+            padding: 0 10px;
+        }
+
+        .action-button {
+            min-width: 50px;
+            transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            padding: 5px 8px 3px;
+            border-radius: 10px;
+            color: #FFF;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            height: 35px;
+            line-height: 22px;
+            margin: 21px;
+            float: right;
+            background-color: #82BF56;
+            border-bottom: 5px solid #669644;
+            text-shadow: 0px -2px #669644;
+        }
+
+            .action-button:active {
+                transform: translate(0px,5px);
+                -webkit-transform: translate(0px,5px);
+                border-bottom: 1px solid;
+                color: #FFF;
+                text-decoration: none;
+            }
+
+            .action-button:hover, .action-button:visited {
+                color: #FFF;
+                text-decoration: none;
+            }
+
+        .validate-message {
+            color: red;
+            width: 77%;
+            margin: 78px auto;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .show-up {
+            top: 100px;
+            opacity: 1;
+        }
+
+        .reveal {
+            width: 70%;
+            opacity: 1;
+        }
+    </style>
+    <div class="modal-form">
+        <div class="row" style="margin-top:40px"><span>Tên đăng nhập</span></div>
+        <input id="txtUserName" placeholder="Nhập tên đăng nhập" />
+        <div class="row" style="margin-top:15px"><span>Quyền đăng nhập</span></div>
+        <select id="cboRoles">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <a class="action-button" id="btnNewAccount" student-id="0">Thêm mới</a>
+        <div class="validate-message">Bạn chưa nhập thông tin</div>
+        <a href="javascript:void(0)" class="modal-form-close"></a>
+    </div>
+    @RenderBody()
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-center',
+                onclick: null,
+                'body-output-type': 'trustedHtml'
+            };
+
+            if ('@User.IsInRole("Admin")' != 'True') {
+                $('.admin').remove();
+            }
+            
+            if ('@User.Identity.IsAuthenticated' == 'True') {
+                $('.logout').show()
+                $('.login').hide()
+            } else {
+                $('.login').show()
+                $('.logout').hide()
+            }
+
+            $('.aside-menu-toggler').click(function () {
+                if ($(this).hasClass('show')) {
+                    $('body').addClass('body-out')
+                    $('.aside-menu').addClass('aside-menu-in')
+                    $(this).removeClass('show')
+                } else {
+                    $('body').removeClass('body-out')
+                    $('.aside-menu').removeClass('aside-menu-in')
+                    $(this).addClass('show')
+                }
+            });
+
+            $('.aside-close').click(function () {
+                $('body').removeClass('body-out')
+                $('.aside-menu').removeClass('aside-menu-in')
+                $('.aside-menu-toggler').addClass('show')
+            })
+
+            $('.modal-form-close').click(function () {
+                ResetForm()
+            })
+
+            $('#btnNewAccount').click(function () {
+                if ($('#txtUserName').val() == '') {
+                    $('.validate-message').addClass('reveal');
+                    $('#txtUserName').addClass('field_error').focus();
+                    return;
+                }
+                else {
+                    $.post('/Admin/AddNewAccount', {
+                        userName: $('#txtUserName').val(),
+                        role: $('#cboRoles').val(),
+                        studentId: Number($('#btnNewAccount').attr('student-id'))
+                    }, function (data) {
+                        toastr.success("Tạo tài khoản thành công")
+                        if (window.location.href.indexOf("Client") > 0) {
+                            var str = '<span>Đang hoạt động</span> <br />' +
+                                        '<button class="Quit">Nghỉ học</button>';
+                            $('#' + $('#btnNewAccount').attr('student-id')).find('td').eq(1).html(str)
+                        }
+                        ResetForm();
+                    })
+                }
+            });
+
+            function ResetForm() {
+                $('.validate-message').removeClass('reveal');
+                $('#txtUserName').removeClass('field_error');
+                $('.modal-form').removeClass('show-up')
+                $('#txtUserName').val('')
+                $('#btnNewAccount').attr('student-id', 0)
+            }
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

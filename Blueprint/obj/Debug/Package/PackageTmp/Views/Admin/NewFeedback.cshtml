@@ -1,0 +1,144 @@
+﻿@model Blueprint.Models.FeedbackItem
+@{
+    ViewBag.Title = "NewFeedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row span {
+        margin: 0 0 20px 20px;
+        color: #1466B5;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .validate-message {
+        width: 100%;
+        float: left;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+
+    .preview {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Thêm phản hồi mới</span>
+        </div>
+        <div class="enquiremain">
+            <div class="validate-message"></div>
+            @using (Html.BeginForm("AddNewFeedback", "Admin", FormMethod.Post, new { @id = "frm_Feedback", enctype = "multipart/form-data" }))
+            {
+                <div class="row" style="height:275px">
+                    <span>Ảnh đại diện</span>
+                    <input style="display:none" type="file" name="image" id="image" accept="image/*" />
+                    <label for="image" title="Chọn ảnh"><img class="action_icon" src="~/Images/plus-icon.png" /></label> <br />
+                    <img class="preview" src="~/Images/cs.jpg" />
+                </div>
+                <div class="row">
+                    <span>Tên học viên</span>
+                    @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @id = "txtName", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Tên khóa học</span>
+                    @Html.DropDownListFor(model => model.CourseID, (SelectList)ViewBag.DropDownCourses, new { @id = "cboCourse", @class = "textbox" })
+                </div>
+                <div class="row">
+                    <span>Nghề nghiệp</span>
+                    @Html.EditorFor(model => model.Career, new { htmlAttributes = new { @id = "txtCareer", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Ý kiến phản hồi</span>
+                    @Html.TextAreaFor(model => model.Content, new { @id = "txtContent", @class = "textbox", @rows = "10" })
+                </div>
+                <div class="row">
+                    <span>Trích dẫn</span>
+                    @Html.TextAreaFor(model => model.Quote, new { @id = "txtQuote", @class = "textbox", @rows = "5" })
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <a class="fakea">Thêm mới</a>
+        </div>
+
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#image").change(function (e) {
+            var input = this;
+            var filename = e.target.value.split('\\').pop();
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        })
+
+        $('.button a').click(function () {
+            processPost();
+        })
+
+        function processPost() {
+            if (isValid()) {
+                $('#frm_Feedback').submit();
+            }
+        }
+
+        function isValid() {
+            if ($('#txtName').val() == '') {
+                $('#txtName').focus();
+                $('#txtName').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập tên học viên.');
+                return false;
+            } else {
+                $('#txtName').removeClass('field_error');
+            }
+
+            if ($('#txtCareer').val() == '') {
+                $('#txtCareer').focus();
+                $('#txtCareer').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập nghề nghiệp.');
+                return false;
+            } else {
+                $('#txtCareer').removeClass('field_error');
+
+            }
+
+            if ($('#txtContent').val() == '') {
+                $('#txtContent').focus();
+                $('#txtContent').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập ý kiến phản hồi.');
+                return false;
+            } else {
+                $('#txtContent').removeClass('field_error');
+
+            }
+
+            if ($('#txtQuote').val() == '') {
+                $('#txtQuote').focus();
+                $('#txtQuote').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập trích dẫn.');
+                return false;
+            } else {
+                $('#txtQuote').removeClass('field_error');
+
+            }
+            return true;
+        }
+    })
+</script>

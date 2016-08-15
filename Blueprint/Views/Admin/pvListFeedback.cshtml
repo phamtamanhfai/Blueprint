@@ -1,0 +1,95 @@
+﻿@model List<Blueprint.Models.FeedbackItem>
+@{int STT = 0;}
+
+<style>
+    table, .grid-header, .grid-items {
+        width: 900px;
+        table-layout: fixed;
+    }
+
+    .inside {
+        max-height:80px;
+        overflow:auto;
+        text-align:justify;
+    }
+</style>
+
+<div class="gridview">
+    <div class="grid-header">
+        <table class="tableview">
+            <thead class="table_heading">
+                <tr>
+                    <th style="width:50px">STT</th>
+                    <th style="width:100px">Thao tác</th>
+                    <th style="width:150px">Tên học viên</th>
+                    <th style="width:200px">Khóa học</th>
+                    <th style="width:200px">Trích dẫn</th>
+                    <th style="width:100px">Ngày tạo</th>
+                    <th style="width:100px">Trạng thái</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="grid-items">
+        <table>
+            @if (Model.Count == 0)
+            {
+                <tbody class="table_body">
+                    <tr>
+                        <td colspan="6">Không tìm thấy dữ liệu</td>
+                    </tr>
+                </tbody>
+            }
+
+            @foreach (var item in Model)
+            {
+
+                <tbody class="table_body">
+                    <tr id="@item.ID">
+                        <td style="width:50px">@(++STT)</td>
+                        <td style="text-align:center;width:100px">
+                            @if (item.Status.Equals("A"))
+                            {
+                                <a class="fakea status lock" data="@item.ID">
+                                    <img class="action_icon" src="~/Images/lock.jpg" title="Khóa" /> |
+                                </a> 
+                            }
+                            else
+                            {
+                                <a class="fakea status unlock" data="@item.ID">
+                                    <img class="action_icon" src="~/Images/open_lock.jpg" title="Mở" /> |
+                                </a>
+                            }
+                            <a href="@Url.Action("EditFeedback", "Admin", new { id = item.ID })">
+                                <img class="action_icon" src="~/Images/edit.png" title="Sửa" />
+                            </a>
+                        </td>
+                        <td style="width:150px">@item.StudentName</td>
+                        <td style="width:200px">@item.CourseName</td>
+                        <td style="width:200px">
+                            <div class="inside">
+                                @item.Quote
+                            </div>
+                        </td>
+                        <td style="width:100px">@item.DateCreated.ToString("dd/MM/yyyy")</td>
+                        @if (item.Status.Equals("A"))
+                        {
+                            <td style="width:100px">Mở</td>
+                        }
+                        else if (item.Status.Equals("D"))
+                        {
+                            <td style="width:100px">Khóa</td>
+                        }
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Admin", new { k = "gKjUCLBdzfrLWLjNWPmNrejOpKgyFGfmxbB8tO2DJkQ=" })');
+    })
+</script>

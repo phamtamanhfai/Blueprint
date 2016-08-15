@@ -1,0 +1,132 @@
+﻿@using Blueprint.Models
+@model Blueprint.Models.TestHeader
+@{
+    ViewBag.Title = "DoTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<QuestionItem> myQues = ViewBag.ListQuestion as List<QuestionItem>;
+    IDictionary<int, List<AnswerItem>> myAns = ViewBag.ListAnswer as IDictionary<int, List<AnswerItem>>;
+}
+
+<style>
+
+    .note {
+        font-size:18px; 
+        color:#999999; 
+        font-family: 'open_sansbold'; 
+        margin-left:15px;
+        text-transform:none !important; 
+        border-bottom: none !important;
+    }
+
+    .wrapperin {
+        position: relative;
+    }
+
+    .hint {
+        display:none;
+        width: 100%;
+        color: #1D39E8;
+        font-weight:bold;
+    }
+
+    .active {
+        display: block !important;
+    }
+
+    .blob {
+        margin-bottom: 20px;
+        border-bottom: 1px solid grey;
+        display: none;
+        clear: both;
+    }
+
+    .disable {
+        background: #DEAAAA !important;
+    }
+
+    .ans-container {
+        padding: 15px 0;
+    }
+
+    .ans {
+        display:inline-block;
+        height:50px;
+        line-height:50px;
+        font-size: 18px;
+    }
+
+    .action_icon {
+        display:none;
+    }
+
+    .button {
+        width:580px;
+    }
+
+    @@media only screen and (max-width: 510px) {
+        .button {
+            width:100%;
+        }
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <div class="col-my-6">
+                <span id="title" data-id="@Model.ID">@Model.Title</span>
+                <span class="note">@Model.ActualNoQuestions Câu hỏi</span>
+            </div>
+            
+            <div class="col-my-6">
+                <div class="fly-button closed">
+                    <a href="@Url.Action("Test","Home")"><span>Đóng kiểm tra</span></a>
+                </div>
+            </div>
+
+            <div class="fly-button-small">
+                <a href="@Url.Action("Test","Home")"><span class="redme">Đóng</span> kiểm tra</a>
+            </div>
+        </div>
+        <div class="enquiremain">
+
+            <div class="button">
+                <a class="fakea disable" id="btnPrev"><img src="~/Images/rightarrow.png" style="margin-right:20px" />Câu trước</a>
+                <a class="fakea" id="btnNext">Câu kế tiếp<img src="~/Images/leftarrow.png" style="margin-left:20px" /></a>
+                <a class="fakea" id="btnFinal" style="display:none">Kết quả</a>
+            </div>
+
+            <div class="enquiremainheading">Câu hỏi số <span class="counter">1</span></div>
+            @for (int i = 1; i <= Model.ActualNoQuestions; i++)
+            {
+                QuestionItem itemQues = myQues.SingleOrDefault(item => item.STT.Equals(i));
+                <div class="blob @(i == 1 ? "active" : "")">
+                    <span style="font-size:18px">@itemQues.Content</span>
+                    <div class="ans-container">
+                        @foreach (var item in myAns[itemQues.ID])
+                        {
+                            <div >
+                                <div class="ans">
+                                    <input class="opt" type="radio" name="radio_@i" value="@item.ID"/> 
+                                    <span>@item.Content</span>
+                                </div>
+                                <img class="action_icon correct" src="~/Images/correct.png" />
+                                <img class="action_icon wrong" src="~/Images/wrong.png" />
+                            </div>
+                        }
+                        <div class="hint">@itemQues.Hint</div>
+                    </div>
+                    
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<input type="hidden" id="tmpActualNoQuestions" value="@Model.ActualNoQuestions" />
+<input type="hidden" id="tmpModelID" value="@Model.ID" />
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Home", new { k = "goNQqNXktSVgnZT1zgqarA==" })');
+    })
+</script>

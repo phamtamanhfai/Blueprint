@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .enquiremain ul {
+        list-style: none;
+    }
+
+    .enquiremain ul li{
+        width: 100%;
+        float: left;
+        font-size: 14px;
+        color: #333;
+        font-family: 'open_sansregular';
+        background: url(../Images/crc.png) no-repeat left 11px;
+        padding: 6px 0 6px 15px;
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Bài kiểm tra tiếng Anh</span>
+        </div>
+        <div class="enquiremain">
+            <div class="enquiremainheading">Hướng dẫn</div>
+            <ul>
+                <li>Có 10 - 20 câu hỏi trong mỗi bài kiểm tra.</li>
+                <li>Bạn phải hoàn thành tất cả các câu hỏi.</li>
+                <li>Có 4 hoặc 3 đáp án cho mỗi câu hỏi.</li>
+                <li>CHỈ có 1 câu trả lời ĐÚNG.</li>
+                <li>Để chọn đáp án, nhấp vào ô chọn ở bên phải câu trả lời.</li>
+                <li>Để đổi câu trả lời, đơn giản, nhấp vào ô chọn khác.</li>
+                <li>Nếu bạn đã chắc chắn về câu trả lời, hãy nhấn vào nút "Câu kế tiếp".</li>
+                <li>Khi tất cả các câu hỏi được hoàn tất, bài kiểm tra sẽ được chấm điểm và gủi kết quả về cho bạn.</li>
+            </ul>
+        </div>
+        <div class="button">
+            <a href="@Url.Action("RandomTest","Home")">Làm kiểm tra ngay</a>
+        </div>
+    </div>
+    
+</section>
+

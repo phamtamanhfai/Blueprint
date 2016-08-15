@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Enquire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .col-my-6 {
+        padding-right:15px;
+    }
+
+    .validate-message {
+        width:100%;
+        min-height:20px;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <img src="~/Images/poster.jpg" style="width:100%"/>
+        <div class="aboutheading">
+            <span>Ghi danh lớp TOEIC PLUS</span>
+        </div>
+        <div class="enquiremain">
+            <div class="enquiremainheading">Khóa học luyện thi TOEIC và tiếng Anh giao tiếp</div>
+            <div class="validate-message"></div>
+            <form action="@Url.Action("PostEnquire", "Home")" method="post">
+                <div class="col-my-6">
+                    <input type="text" placeholder="Họ tên" class="textbox" id="txtName" name="Name" />
+                    <input type="text" placeholder="Địa chỉ" class="textbox" id="txtAddress" name="Address" />
+                    <input type="text" placeholder="Điện thoại" class="textbox" id="txtPhone" name="Phone" />
+                    <input type="email" placeholder="Email" class="textbox" id="txtEmail" name="Email" />
+                </div>
+
+                <div class="col-my-6">
+                    <input type="date" title="Ngày sinh" class="textbox" id="txtBirthDate" name="BirthDate" />
+                    <select class="textbox" id="cboCourse" name="CourseID">
+                        <option value="-1">---Chọn khóa học---</option>
+                        @foreach (var item in ViewBag.Courses as List<Blueprint.Models.CoursesItem>)
+                        {
+                            <option value="@item.ID">@item.Title</option>
+                        }
+                    </select>
+                    <textarea class="textbox" placeholder="Mục đích của bạn khi học tiếng Anh là gì?" style="height:90px" id="txaPurpose" name="Purpose"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="button">
+            <a class="fakea submit">Ghi danh</a>
+        </div>
+    </div>
+
+</section>
+
+<input type="hidden" id="tmpMsg" value="@TempData["Msg"]" />
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Home", new { k = "Wxg+nrQ/Fj2+C0TJ0L366Q==" })');
+    })
+</script>

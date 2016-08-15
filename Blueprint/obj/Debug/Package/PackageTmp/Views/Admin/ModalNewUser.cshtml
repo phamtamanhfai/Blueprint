@@ -1,0 +1,112 @@
+﻿<style>
+    .modal-form input, .modal-form select {
+        width: 100%;
+        height: 45px;
+        border-radius: 5px;
+        margin-top: 7px;
+        padding: 0 10px;
+    }
+
+    .action-button {
+        min-width: 50px;
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        padding: 5px 8px 3px;
+        border-radius: 10px;
+        color: #FFF;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        height: 35px;
+        line-height: 22px;
+        margin: 21px;
+        float: right;
+        background-color: #82BF56;
+        border-bottom: 5px solid #669644;
+        text-shadow: 0px -2px #669644;
+    }
+
+        .action-button:active {
+            transform: translate(0px,5px);
+            -webkit-transform: translate(0px,5px);
+            border-bottom: 1px solid;
+            color: #FFF;
+            text-decoration: none;
+        }
+
+        .action-button:hover, .action-button:visited {
+            color: #FFF;
+            text-decoration: none;
+        }
+
+    .modal-validate-message {
+        color: red;
+        width: 77%;
+        margin: 78px auto;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    .show-up {
+        top: 100px !important ;
+        opacity: 1 !important;
+        display: block !important;
+    }
+
+    .reveal {
+        width: 70%;
+        opacity: 1;
+    }
+</style>
+
+<div class="row" style="margin-top:40px"><span>Tên đăng nhập</span></div>
+<input id="txtUserName" placeholder="Nhập tên đăng nhập" />
+<div class="row" style="margin-top:15px"><span>Quyền đăng nhập</span></div>
+<select id="cboRoles">
+    <option value="User">User</option>
+    <option value="Admin">Admin</option>
+</select>
+<a class="action-button" id="btnNewAccount" student-id="0">Thêm mới</a>
+<div class="modal-validate-message">Bạn chưa nhập thông tin</div>
+<a href="javascript:void(0)" class="modal-form-close"></a>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.modal-form-close').click(function () {
+            ResetForm()
+        })
+
+        $('#btnNewAccount').click(function () {
+            if ($('#txtUserName').val() == '') {
+                $('.modal-validate-message').addClass('reveal');
+                $('#txtUserName').addClass('field_error').focus();
+                return;
+            }
+            else {
+                $.post('/Admin/AddNewAccount', {
+                    userName: $('#txtUserName').val(),
+                    role: $('#cboRoles').val(),
+                    studentId: Number($('#btnNewAccount').attr('student-id'))
+                }, function (data) {
+                    toastr.success("Tạo tài khoản thành công")
+                    if (window.location.href.indexOf("Client") > 0) {
+                        var str = '<span>Đang hoạt động</span> <br />' +
+                                    '<button class="Quit">Nghỉ học</button>';
+                        $('#' + $('#btnNewAccount').attr('student-id')).find('td').eq(1).html(str)
+                    }
+                    ResetForm();
+                })
+            }
+        });
+
+        function ResetForm() {
+            $('.validate-message').removeClass('reveal');
+            $('#txtUserName').removeClass('field_error');
+            $('.modal-form').removeClass('show-up')
+            $('#txtUserName').val('')
+            $('#btnNewAccount').attr('student-id', 0)
+        }
+    })
+</script>

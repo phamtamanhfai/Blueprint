@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="fb:app_id" content="868674296578792" />
+    <meta property="og:url" content="http://toeicplus.somee.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anh ngữ hiệu quả" />
+    <title>Anh ngữ hiệu quả</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=868674296578792";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <header>
+        <div class="wrapperin">
+            <div class="logo">
+                <a class="logo" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/logo2.png" alt="" />
+                </a>
+            </div>
+            
+            <div class="logo-menu">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("About", "Home")">Giới thiệu</a>
+                    </li>
+                    <li class="logout">|</li>
+                    <li class="logout">
+                        <a href="javascript:void(0)">Tài khoản</a>
+                        <div class="border" style="width:124px; top: 12px">
+                            <ul style="width:100%">
+                                <li><a href="@Url.Action("Logout", "Admin")">Đăng xuất</a></li>
+                                <li><a href="@Url.Action("ChangePass", "Admin")">Đổi mật khẩu</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>|</li>
+                    <li>
+                        <a href="@Url.Action("Test", "Home")">Làm kiểm tra</a>
+                    </li>
+                    <li class="login">|</li>
+                    <li class="login">
+                        <a href="@Url.Action("Login", "Admin")">Đăng nhập</a>
+                    </li>
+                    
+                </ul>
+                <div class="enquirenow-bg">
+                    <a href="@Url.Action("Enquire", "Home")">Ghi danh</a>
+                </div>
+            </div>
+
+            <div class="logo-menu-mobile">
+                <div class="enquirelink">
+                    <a href="@Url.Action("Enquire", "Home")">Ghi danh</a>
+                </div>
+                <div>
+                    <i class="aside-menu-toggler show"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Aside menu on mobile-->
+    <div class="aside-menu">
+        <i class="aside-close"></i>
+        <ul>
+            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+            <li><a href="@Url.Action("About","Home")">Giới thiệu</a></li>
+            <li><a href="@Url.Action("Course", "Home")">Khóa học</a></li>
+            <li><a href="@Url.Action("Feedback", "Home")">Chia sẻ học viên</a></li>
+            <li><a href="@Url.Action("Test","Home")">Làm kiểm tra</a></li>
+            <li><a href="@Url.Action("Enquire", "Home")">Ghi danh</a></li>
+            <li class="login"><a href="@Url.Action("Login", "Admin")">Đăng nhập</a></li>
+        </ul>
+
+        <div class="admin">
+            <ul>
+                <li><a href="@Url.Action("Login", "Admin")">Quản trị</a></li>
+                <li><a href="@Url.Action("Courses", "Admin")">Khóa học</a></li>
+                <li><a href="@Url.Action("Test", "Admin")">Bài kiểm tra</a></li>
+                <li><a href="@Url.Action("Client", "Admin")">Khách hàng</a></li>
+                <li><a href="@Url.Action("Feedback", "Admin")">Phản hồi</a></li>
+                <li><a href="@Url.Action("User", "Admin")">Tài khoản</a></li>
+                <li class="logout"><a href="@Url.Action("Logout", "Admin")">Đăng xuất</a></li>
+                <li class="logout"><a href="@Url.Action("ChangePass", "Admin")">Đổi mật khẩu</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="floating_menu">
+        <div class="wrapperin">
+            <div class="menu-container">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <img class="icon-menu" src="~/Images/icon-home.png"/>
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Course", "Home", new { @title = ""})">
+                            <img class="icon-menu" src="~/Images/icon-course.png" />
+                            Khóa học
+                        </a>
+                        <div class="border">
+                            <ul>
+                                @Html.Action("RenderCoursesMenu", "Home")
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Feedback", "Home")">
+                            <img class="icon-menu" src="~/Images/icon-feedback.png" />
+                            Chia sẻ học viên
+                        </a>
+                    </li>
+                    <li class="admin">
+                        <a href="@Url.Action("Login", "Admin")">Quản trị</a>
+                        <div class="border">
+                            <ul>
+                                <li><a href="@Url.Action("Courses", "Admin")">Khóa học</a></li>
+                                <li><a href="@Url.Action("Test", "Admin")">Bài kiểm tra</a></li>
+                                <li><a href="@Url.Action("Client", "Admin")">Khách hàng</a></li>
+                                <li><a href="@Url.Action("Feedback", "Admin")">Phản hồi</a></li>
+                                <li><a href="@Url.Action("User", "Admin")">Tài khoản</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        .modal-form {
+            opacity: 0;
+            position: fixed;
+            display:none;
+            padding: 20px;
+            /* Thay đổi tùy nội dung
+            top: 60px;
+            left: 50px;
+            width: 300px;
+            height: 355px;*/
+            background-color: white;
+            border: 2px outset #3498DB;
+            border-radius: 8px;
+            box-shadow: 0px 0px 16px 0px;
+            overflow: hidden;
+            z-index: 5;
+            transition: all 0.3s;
+        }
+
+        .modal-form-close {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.3;
+        }
+
+            .modal-form-close:hover {
+                opacity: 1;
+            }
+
+            .modal-form-close:before, .modal-form-close:after {
+                position: absolute;
+                left: 15px;
+                content: ' ';
+                height: 23px;
+                width: 2px;
+                background-color: #333;
+            }
+
+            .modal-form-close:before {
+                transform: rotate(45deg);
+            }
+
+            .modal-form-close:after {
+                transform: rotate(-45deg);
+            }
+    </style>
+    
+    <div class="modal-form animate"></div>
+
+    @RenderBody()
+    <footer>
+        <div class="wrapperin">
+            <div class="con_footer" style="float:left;width:45%">
+                <h3 style="color:white">Trung tâm anh ngữ LECXICA ENGLISH</h3>
+                <ul style="color:#0099cc">
+                    <li>Địa chỉ:&nbsp;&nbsp;&nbsp;3/8 đường Thích Quảng Đức P.3 Q. Phú Nhuận, HCM</li>
+                    <li>ĐT:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0982830711</li>
+                    <li>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xuancongspk4d@gmail.com</li>
+                </ul>
+
+                <iframe src="https://www.google.com/maps/d/embed?mid=1JAYAK-ruHHWftU3jPTLd7ffCJQ0" style="width:100%" height="480"></iframe>
+            </div>
+
+            <div class="con_footer" style="float:right;width:45%">
+                <h3 style="color:white">Fanpage LECXICA ENGLISH</h3>
+                <div class="fb-page" data-href="https://www.facebook.com/LexicaEnglish/" data-tabs="timeline" data-width="440"  data-height="595" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/LexicaEnglish/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/LexicaEnglish/">Lexica English</a></blockquote></div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-center',
+                onclick: null,
+                'body-output-type': 'trustedHtml'
+            };
+
+            if ('@User.IsInRole("Admin")' != 'True') {
+                $('.admin').remove();
+            }
+            
+            if ('@User.Identity.IsAuthenticated' == 'True') {
+                $('.logout').show()
+                $('.login').hide()
+                $('.menu-container').css("width", "620px")
+            } else {
+                $('.login').show()
+                $('.logout').hide()
+                $('.menu-container').css("width", "520px")
+            }
+
+            $('.aside-menu-toggler').click(function () {
+                if ($(this).hasClass('show')) {
+                    $('body').addClass('body-out')
+                    $('.aside-menu').addClass('aside-menu-in')
+                    $(this).removeClass('show')
+                } else {
+                    $('body').removeClass('body-out')
+                    $('.aside-menu').removeClass('aside-menu-in')
+                    $(this).addClass('show')
+                }
+            });
+
+            $('.aside-close').click(function () {
+                $('body').removeClass('body-out')
+                $('.aside-menu').removeClass('aside-menu-in')
+                $('.aside-menu-toggler').addClass('show')
+            })
+
+            $('center').remove();
+            $('script[src="http://ads.mgmt.somee.com/serveimages/ad2/WholeInsert4.js"]').next().remove()
+            $('script[src="http://ads.mgmt.somee.com/serveimages/ad2/WholeInsert4.js"]').next().remove()
+            $('script[src="http://ads.mgmt.somee.com/serveimages/ad2/WholeInsert4.js"]').next().remove()
+            $('script[src="http://ads.mgmt.somee.com/serveimages/ad2/WholeInsert4.js"]').remove()
+            
+        })
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

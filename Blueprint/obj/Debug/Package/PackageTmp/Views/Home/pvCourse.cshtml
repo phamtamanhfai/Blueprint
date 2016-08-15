@@ -1,0 +1,321 @@
+﻿@model IEnumerable<Blueprint.Models.CoursesItem>
+@using Blueprint.Utils
+@{
+    ViewBag.Title = "Courses";
+    IEnumerable<Blueprint.Models.CoursesItem> model = null;
+    int count = 0;
+    if (Request.Url.AbsolutePath.IndexOf("Khoa-hoc") == -1)
+    {
+        model = Model.Take(3);
+    }
+    else
+    {
+        model = Model;
+    }
+}
+
+<style>
+    .col-my-3 {
+        margin: 5px;
+        background: #fff;
+        padding: 8px;
+        position: relative;
+        height: 250px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #dedede #bababa #aaa #bababa;
+        box-shadow: 0 3px 3px rgba(255,255,255,.1), 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 5px #444;
+        border-radius: 10px;
+        background-color: white;
+        background-image: linear-gradient(top, #f6f6f6, #eae8e8);
+        width: 100%;
+        max-width: 250px;
+    }
+
+    
+        .col-my-3 a, .col-my2-3 a {
+            display: block;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+            .col-my-3 a img{
+                width: 100%;
+                height: 100%;
+            }
+
+            .col-my-3 a div {
+                position: absolute;
+                background: rgba(75,75,75,0.7);
+                width: 100%;
+                height: 100%;
+            }
+
+        .col-my-3 span {
+            display: block;
+            width: 84%;
+            text-align: center;
+            padding: 10px 0;
+            margin: 40px 20px 20px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(255,255,255,0.3);
+            box-sizing: border-box;
+        }
+
+        .col-my-3 p {
+            margin: 0px 20px 20px 20px;
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+
+    .col-my2-3 {
+        margin: 9px;
+    }
+        .col-my2-3 img {
+            float:left;
+            width:100%;
+            height: 150px;
+        }
+
+        .col-my2-3 a:hover {
+            text-decoration:none;
+        }
+
+    .description {
+        float: right;
+        width:100%;
+        height: auto;
+        color:white;
+        padding: 30px;
+    }
+        .description span {
+            position:relative;
+            text-transform:uppercase;
+            border-bottom:3px solid white;
+            font-size:25px;
+            font-weight:bold;
+            display:block;
+            padding-bottom:9px;
+            margin-bottom: 9px;
+        }
+
+    .dis-more {
+        position:absolute;
+        right: 0; bottom: -1px;
+        background: url(../../Images/discovermore.jpg) no-repeat;
+        height:38px;
+        width:140px;
+        line-height:38px;
+        text-align:center;
+        font-weight:bold;
+        font-size:15px;
+    }
+
+        .dis-more:hover {
+            background: url(../../Images/discovermore-hover.jpg) no-repeat;
+        }
+
+    .course-container {
+        width: 265px;
+        margin: auto;
+    }
+
+    .course-container-home {
+        float: left;
+        width: 100%;
+    }
+
+    .link-container {
+        box-shadow: -7px -2px 21px 1px;
+        padding-left: 0px !important;
+    }
+
+    .clearfix:before {
+        content: " ";
+        display: table;
+    }
+
+    .clearfix:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+    @@media (max-width: 991px){
+        .col-my2-3 img {
+            width:50%;
+            min-height:251px
+        }
+
+        .description{
+            width:50%;
+            overflow: hidden;
+        }
+    }
+
+    @@media (max-width: 615px){
+        .col-my2-3 img {
+            display:none
+        }
+
+        .description{
+            width:100%;
+            min-height:193px;
+            padding:15px;
+        }
+    }
+</style>
+
+<div class="course-container-home">
+
+    @foreach (var item in model)
+    {
+        count++;
+        <div class="link-container col-my2-3">
+            <a href="@Url.Action("Course", "Home", new { title = Utility.EnterByDash(Utility.ConvertToUnsign(item.Title)) })">
+                <img src="@("/Upload/Courses/" + item.Image)" />
+                <div class="description">
+                    <span >@item.Title</span>
+                    <p style="text-align:justify;color:white">@item.Subject</p>
+                    <div class="dis-more">Xem thêm</div>
+                </div>
+            </a>
+        </div>
+        if (count % 3 == 0)
+        {
+            <div class="clearfix"></div>
+        }
+
+    }
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.each($('.description'), function (i, o) {
+            switch (i % 3) {
+                case 0:
+                    $('.description').eq(i).css('background-color', 'red');
+                    break;
+                case 1:
+                    $('.description').eq(i).css('background-color', '#0058a9');
+                    break;
+                case 2:
+                    $('.description').eq(i).css('background-color', '#0298bd');
+                    break;
+            }
+
+            switch (i) {
+                case 0:
+                case 1:
+                case 2:
+                    $('.description').eq(i).css('height', '251px')
+                    if (window.innerWidth < 991) {
+                        $('.col-my2-3').eq(i).find('img').css('height','251px')
+                    }
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    $('.description').eq(i).css('height', '286px')
+                    if (window.innerWidth < 991) {
+                        $('.col-my2-3').eq(i).find('img').css('height', '286px')
+                    }
+                    break;
+                case 6:
+                case 7:
+                    $('.description').eq(i).css('height', '336px')
+                    if (window.innerWidth < 991) {
+                        $('.col-my2-3').eq(i).find('img').css('height', '336px')
+                    }
+                    break;
+            }
+        })
+
+        var tmhover;
+        $('.col-my-3 a').mouseenter(function (e) {
+            var $el = $(this);
+            var $hoverElem = $el.find( 'div' )
+            var dir = getDir($el, { x: e.pageX, y: e.pageY })
+            var styleCSS = getStyle(dir);
+            $hoverElem.hide().css(styleCSS.from);
+            clearTimeout(tmhover);
+
+            tmhover = setTimeout(function () {
+
+                $hoverElem.show(0, function () {
+                    var $el = $(this);
+                    $el.css('transition', 'all 0.3s ease').css(styleCSS.to);
+                });
+            }, 0);
+        })
+
+        $('.col-my-3 a').mouseleave(function (e) {
+            var $el = $(this);
+            var $hoverElem = $el.find('div')
+            var dir = getDir($el, { x: e.pageX, y: e.pageY })
+            var styleCSS = getStyle(dir);
+
+            $hoverElem.css('transition', 'all 0.3s ease');
+            clearTimeout(tmhover);
+            $hoverElem.css(styleCSS.from);
+        })
+
+        function getDir($el, coordinates) {
+            var w = $el.width(),
+				h = $el.height(),
+
+		    x = (coordinates.x - $el.offset().left - (w / 2)) * (w > h ? (h / w) : 1),
+		    y = (coordinates.y - $el.offset().top - (h / 2)) * (h > w ? (w / h) : 1),
+
+		    direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+
+            // the angle and the direction from where the mouse came in/went out clockwise (TRBL=0123);
+            return direction;
+        }
+
+        function getStyle (direction) {
+
+            var fromStyle, toStyle,
+				slideFromTop = { left : '0px', top : '-100%' },
+				slideFromBottom = { left : '0px', top : '100%' },
+				slideFromLeft = { left : '-100%', top : '0px' },
+				slideFromRight = { left : '100%', top : '0px' },
+				slideTop = { top : '0px' },
+				slideLeft = { left : '0px' };
+
+            switch( direction ) {
+                case 0:
+                    // from top
+                    fromStyle = slideFromTop;
+                    toStyle = slideTop;
+                    break;
+                case 1:
+                    // from right
+                    fromStyle = slideFromRight;
+                    toStyle = slideLeft;
+                    break;
+                case 2:
+                    // from bottom
+                    fromStyle = slideFromBottom;
+                    toStyle = slideTop;
+                    break;
+                case 3:
+                    // from left
+                    fromStyle = slideFromLeft;
+                    toStyle = slideLeft;
+                    break;
+            };
+
+            return { from : fromStyle, to : toStyle };
+
+        }
+    })
+</script>

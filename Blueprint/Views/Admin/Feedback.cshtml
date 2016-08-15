@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime today = DateTime.Now;
+}
+
+<style>
+    .row {
+        margin: 10px 0;
+    }
+
+    .col-md-3 {
+        margin: 6px 0;
+    }
+
+    .row input, .row select {
+        width: 100%;
+    }
+
+    .row span {
+        color: #063E51;
+        font-weight: bold;
+    }
+
+    .col-md-3 button {
+        margin: 0 9px;
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Quản trị ý kiến phản hồi</span>
+        </div>
+        <div class="enquiremain">
+            <div class="row">
+                <div class="col-md-3"><span>Tên học viên</span></div>
+                <div class="col-md-3"><input id="txtName" name="Name" /></div>
+                <div class="col-md-3"><span>Từ ngày</span></div>
+                <div class="col-md-3"><input type="date" id="txtFromDate" name="FromDate" value="@today.ToString("yyyy-MM-dd")" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><span>Khóa học</span></div>
+                <div class="col-md-3">
+                    <select id="cboCourse" name="Course">
+                        <option value="-1">Tất cả</option>
+                        @foreach (var item in ViewBag.Courses as List<Blueprint.Models.CoursesItem>)
+                        {
+                            <option value="@item.ID">@item.Title</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3"><span>Đến ngày</span></div>
+                <div class="col-md-3"><input type="date" id="txtToDate" name="ToDate" value="@today.ToString("yyyy-MM-dd")" /></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><span>Trạng thái</span></div>
+                <div class="col-md-3">
+                    <select id="cboStatus" name="Status">
+                        <option value="">Tất cả</option>
+                        <option value="A">Mở</option>
+                        <option value="D">Khóa</option>
+                    </select>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <button type="button" id="btnSearch">Tìm kiếm</button>
+                </div>
+            </div>
+            
+
+            <div class="list-items"></div>
+            <div class="button">
+                <a href="@Url.Action("NewFeedback","Admin")">Thêm phản hồi mới</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Admin", new { k = "343cOlRqXsSZ77OqTMMy2g==" })');
+    })
+</script>
+
+

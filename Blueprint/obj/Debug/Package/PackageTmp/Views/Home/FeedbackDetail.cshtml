@@ -1,0 +1,87 @@
+﻿@model Blueprint.Models.FeedbackItem
+
+<style>
+
+    .left-col {
+        width: 270px;
+        height: 180px;
+        float: left;
+    }
+
+    .right-col {
+        max-width: 530px;
+        height: 180px;
+        float: left;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .avatar {
+        width: 264px;
+        height: 170px;
+        border: 1px solid #d9d9d9;
+        padding: 5px;
+    }
+
+    .title {
+        font-size: 20px;
+        color: #46A746;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 27px;
+    }
+
+    .rows {
+        height: 30px;
+    }
+
+    .col1 {
+        font-size: 13px;
+        font-weight: bold;
+        color: red;
+    }
+
+    .col2 {
+        font-size: 13px;
+    }
+
+    .content {
+        clear:both;
+        font-size: 20px;
+        text-align: justify;
+        line-height: 40px;
+    }
+</style>
+<div class="left-col">
+    <img class="avatar" src="@("/Upload/Feedback/" + Model.Image)" />
+</div>
+<div class="right-col">
+    <span class="title">THÔNG TIN HỌC VIÊN</span>
+    <div class="rows">
+        <span class="col1">HỌ VÀ TÊN:</span>
+        <span class="col2">@Model.StudentName</span>
+    </div>
+    <div class="rows">
+        <span class="col1">NGHỀ NGHIỆP:</span>
+        <span class="col2">@Model.Career</span>
+    </div>
+    @*<div class="rows">
+        <span class="col1">KHÓA HỌC:</span>
+        <span class="col2">@Model.CourseName</span>
+    </div>*@
+</div>
+
+<div class="content">@Model.Content</div>
+<a href="javascript:void(0)" class="modal-form-close"></a>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.modal-form-close').click(function () {
+            $('.modal-form').addClass('flipOutX')
+            setTimeout(function () {
+                $('.modal-form').removeClass('show-up').removeClass('bounceIn').removeClass('flipOutX')
+            }, 1000)
+        })
+    })
+</script>

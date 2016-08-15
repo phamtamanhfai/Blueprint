@@ -1,0 +1,91 @@
+﻿@model Blueprint.Models.TestHeader
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row span {
+        margin: 0 0 20px 20px;
+        color: #1466B5;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .validate-message {
+        width: 100%;
+        float: left;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Tạo bài kiểm tra mới</span>
+        </div>
+        <div class="enquiremain">
+            <div class="validate-message"></div>
+            @using (Html.BeginForm("AddNewTest", "Admin", FormMethod.Post, new { @id = "frm_Test" }))
+            {
+                <div class="row">
+                    <span>Tiêu đề</span>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "txtTitle", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Số câu hỏi</span>
+                    @Html.EditorFor(model => model.NoQuestions, new { htmlAttributes = new { @id = "txtNo", @class = "textbox" } })
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <a class="fakea">Thêm mới</a>
+        </div>
+
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.button a').click(function () {
+            processPost();
+        })
+
+        $('form').keydown(function (e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                processPost();
+            }
+        })
+
+        function processPost() {
+            if (isValid()) {
+                $('#frm_Test').submit();
+            }
+        }
+
+        function isValid() {
+            if ($('#txtTitle').val() == '') {
+                $('#txtTitle').focus();
+                $('#txtTitle').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập tiêu đề.');
+                return false;
+            } else {
+                $('#txtTitle').removeClass('field_error');
+            }
+
+            if ($('#txtNo').val() == '') {
+                $('#txtNo').focus();
+                $('#txtNo').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập số câu hỏi.');
+                return false;
+            } else {
+                $('#txtNo').removeClass('field_error');
+
+            }
+            return true;
+        }
+    })
+</script>

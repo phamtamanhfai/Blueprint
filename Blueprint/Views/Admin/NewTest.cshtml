@@ -1,0 +1,55 @@
+﻿@model Blueprint.Models.TestHeader
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row span {
+        margin: 0 0 20px 20px;
+        color: #1466B5;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .validate-message {
+        width: 100%;
+        float: left;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Tạo bài kiểm tra mới</span>
+        </div>
+        <div class="enquiremain">
+            <div class="validate-message"></div>
+            @using (Html.BeginForm("AddNewTest", "Admin", FormMethod.Post, new { @id = "frm_Test" }))
+            {
+                <div class="row">
+                    <span>Tiêu đề</span>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "txtTitle", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Số câu hỏi</span>
+                    @Html.EditorFor(model => model.NoQuestions, new { htmlAttributes = new { @id = "txtNo", @class = "textbox" } })
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <a class="fakea">Thêm mới</a>
+        </div>
+
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Admin", new { k = "T895zPFrc/gYk4zL23UnDA==" })');
+    })
+</script>

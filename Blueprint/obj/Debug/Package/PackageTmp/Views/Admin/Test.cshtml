@@ -1,0 +1,108 @@
+﻿@model List<Blueprint.Models.TestHeader>
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int STT = 0;
+}
+
+<style>
+    .status:after {
+        content: "|";
+    }
+
+    .fakea {
+        margin: 0 !important;
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Danh sách bài kiểm tra</span>
+        </div>
+        <div class="enquiremain">
+            @if (Model.Count == 0) { 
+                <h3>Chưa có bài kiểm tra nào</h3>
+            }
+            else
+            {
+                <table style="width:100%">
+                    <thead class="table_heading">
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Số câu hỏi</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    
+                    @foreach (var item in Model)
+                    {
+                        <tbody class="table_body">
+                            <tr>
+                                <td>@(++STT)</td>
+                                <td>@item.Title</td>
+                                <td>@item.NoQuestions</td>
+                                <td>@(item.Status.Equals("A") ? "Mở" : "Khóa")</td>
+                                <td style="text-align:center;">
+                                    @if (item.Status.Equals("A"))
+                                    {
+                                        <a class="fakea status lock" data="@item.ID">
+                                            <img class="action_icon" src="~/Images/lock.jpg" title="Khóa" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="fakea status unlock" data="@item.ID">
+                                            <img class="action_icon" src="~/Images/open_lock.jpg" title="Mở" />
+                                        </a>
+                                    }
+                                    <a href="@Url.Action("EditQuestion", "Admin", new { testId = item.ID })">
+                                        <img class="action_icon" src="~/Images/edit.png" title="Sửa" />
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            }
+        </div>
+
+        <div class="button">
+            <a href="@Url.Action("NewTest","Admin")">Tạo bài kiểm tra</a>
+        </div>
+
+        
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.status').click(function () {
+            var $this = $(this);
+            var $tr = $(this).parents('tr');
+            if ($(this).hasClass('lock')) {
+                $.post('/Admin/Lock', { id: Number($(this).attr('data')), entity: "Test" }, function (data) {
+                    $this.find('img').attr('src', '/Images/open_lock.jpg').attr('title', 'Mở');
+                    $this.removeClass('lock').addClass('unlock');
+                    $tr.find('td').eq(3).text('Khóa');
+                });
+            }
+            else if ($(this).hasClass('unlock')) {
+                $.post('/Admin/Unlock', { id: Number($(this).attr('data')), entity: "Test" }, function (data) {
+
+                    if (data != '-1') {
+                        $this.find('img').attr('src', '/Images/lock.jpg').attr('title', 'Khóa');
+                        $this.removeClass('unlock').addClass('lock');
+                        $tr.find('td').eq(3).text('Mở');
+                    } else {
+                        toastr.info('Bài kiểm tra chưa có câu hỏi');
+                    }
+                    
+                });
+            }
+        })
+    })
+</script>

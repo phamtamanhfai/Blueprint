@@ -1,0 +1,128 @@
+﻿@model List<Blueprint.Models.StudentItem>
+@{int STT = 0;}
+
+<style>
+    table, .grid-header, .grid-items {
+        width:1450px;
+        table-layout:fixed;
+    }
+
+</style>
+
+<div class="gridview">
+    <div class="grid-header">
+        <table class="tableview">
+            <thead class="table_heading">
+                <tr>
+                    <th style="width:50px">STT</th>
+                    <th style="width:130px">Trạng thái</th>
+                    <th style="width:200px">Tên học viên</th>
+                    <th style="width:200px">Khóa học</th>
+                    <th style="width:200px">Địa chỉ</th>
+                    <th style="width:150px">SĐT</th>
+                    <th style="width:150px">Email</th>
+                    <th style="width:100px">Ngày sinh</th>
+                    <th style="width:150px">Mục tiêu</th>
+                    <th style="width:120px">Ngày đăng ký</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="grid-items">
+        <table>
+            @if (Model.Count == 0)
+            {
+                <tbody class="table_body">
+                    <tr>
+                        <td colspan="12">Không tìm thấy dữ liệu</td>
+                    </tr>
+                </tbody>
+            }
+
+            @foreach (var item in Model)
+            {
+
+                <tbody class="table_body">
+                    <tr id="@item.ID">
+                        <td style="width:50px">@(++STT)</td>
+                        @if (item.Status.Equals("P"))
+                        {
+                            <td style="width:130px">
+                                <span>Chưa kích hoạt</span><br />
+                                <a class="new-account" href="javascript:void(0)">Tạo tài khoản</a>
+                            </td>
+                        }
+                        else if (item.Status.Equals("A"))
+                        {
+                            <td style="width:130px">
+                                <span>Đang hoạt động</span><br />
+                                <button class="Quit">Nghỉ học</button>
+                            </td>
+                        }
+                        else if (item.Status.Equals("Q"))
+                        {
+                            <td style="width:130px">
+                                <span>Đã nghỉ</span> <br />
+                                <button class="Restore">Kích hoạt lại</button>
+                            </td>
+                        }
+                        <td style="width:200px">@item.Name</td>
+                        <td style="width:200px">@item.CourseName</td>
+                        <td style="width:200px">@item.Address</td>
+                        <td style="width:150px">@item.Phone</td>
+                        <td style="width:150px">@item.Email</td>
+                        <td style="width:100px">@item.BirthDate.ToString("dd/MM/yyyy")</td>
+                        <td style="width:150px">@item.Purpose</td>
+                        <td style="width:120px">@item.DateCreated.ToString("dd/MM/yyyy")</td>
+                        
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.new-account').click(function () {
+            var id = $(this).parents('tr').attr('id');
+            $('#btnNewAccount').attr('student-id',id)
+            $('.modal-form').addClass('show-up')
+            $('#cboRoles').val('User')
+            $('option[value="User"]').show()
+            $('option[value="Admin"]').hide()
+        })
+
+        $(document).on('click','.Quit',function (e) {
+            var id = $(this).parents('tr').find('td').eq(0).text();
+            $.post('/Admin/GetStudent', { id: id }, function (data) {
+                if (data.Status != 'Q') {
+                    $.post('/Admin/SetStudent', { id: id, status: 'Q' }, function (data) {
+                        toastr.success('Cập nhật trạng thái thành công.')
+                    })
+                }
+                
+                var str = '<span>Đã nghỉ</span> <br />' +
+                          '<button class="Restore">Kích hoạt lại</button>';
+                $(e.target).parent().html(str);
+            });
+        })
+
+        $(document).on('click','.Restore',function (e) {
+            var id = $(this).parents('tr').find('td').eq(0).text();
+            $.post('/Admin/GetStudent', { id: id }, function (data) {
+                if (data.Status != 'A') {
+                    $.post('/Admin/SetStudent', { id: id, status: 'A' }, function (data) {
+                        toastr.success('Cập nhật trạng thái thành công.')
+                    })
+                }
+
+                var str = '<span>Đang hoạt động</span> <br />' +
+                          '<button class="Quit">Nghỉ học</button>';
+                $(e.target).parent().html(str);
+            });
+        })
+    })
+</script>

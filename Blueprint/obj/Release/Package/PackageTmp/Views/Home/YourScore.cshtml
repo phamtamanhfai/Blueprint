@@ -1,0 +1,87 @@
+﻿@model Blueprint.Models.TestHeader
+@{
+    ViewBag.Title = "YourScore";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    float percent = (float)ViewBag.NoCorrect / (float)Model.ActualNoQuestions;
+}
+
+<style>
+    .result {
+        float: left;
+        width: 600px;
+        margin: auto;
+        margin-top: 30px;
+        color: #4A79CA;
+        font-weight: bold;
+        font-size:17px;
+    }
+
+    .return {
+        float:right;
+        z-index:100;
+    }
+
+        .return a {
+            background: url(../../Images/return.png) no-repeat right 15px; 
+            border:1px solid #cccccc; 
+            border-radius:5px; 
+            color:#333333; 
+            display: block; 
+            font-family:'rokkittregular'; 
+            font-size:18px;  
+            padding: 12px 0; 
+            text-align: center; 
+            width:250px; 
+            text-decoration:none; 
+            text-transform:uppercase;
+        }
+
+            .return a:hover {
+                background:#f1f1f1 url(../../Images/return.png) no-repeat right 15px;
+                text-decoration:underline;
+            }
+</style>
+
+
+
+<div class="aboutheading">
+    <div class="col-my-6">
+        <span>Kết quả</span>
+    </div>
+    <div class="col-my-6">
+        <div class="return">
+            <a href="@Url.Action("Test","Home")"><span>Quay lại</span></a>
+        </div>
+    </div>
+</div>
+<div class="enquiremain">
+    <div class="enquiremainheading">@Model.Title</div>
+    <ul>
+        <li>Số câu hỏi: @Model.ActualNoQuestions</li>
+        <li>Số câu trả lời đúng: @ViewBag.NoCorrect</li>
+    </ul>
+
+    @if (percent > 0.8) { 
+        <div class="result">Bạn nên tham gia với chúng tôi</div>
+    }
+    else if (percent > 0.6)
+    {
+        <div class="result">Bạn nên tham gia với chúng tôi hơn</div>
+    }
+    else if (percent > 0.4)
+    {
+        <div class="result">Bạn nên tham gia với chúng tôi hơn nữa</div>
+    }
+    else if (percent > 0.2)
+    {
+        <div class="result">Bạn nên tham gia với chúng tôi hơn nữa nhé</div>
+    }
+    else
+    {
+        <div class="result">Bạn nên tham gia với chúng tôi hơn nữa nhé bạn</div>
+    }
+
+</div>
+
+
+

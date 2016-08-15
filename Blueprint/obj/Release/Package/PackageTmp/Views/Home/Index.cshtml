@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .main-slider, .slider {
+        margin-top:-8px;
+        float: left;
+    }
+</style>
+
+<div class="main-slider">
+    <div class="banner">
+        <div class="slider">
+            <div class="flexslider">
+                <ul class="slides">
+
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image1.jpg"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image2.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image3.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image4.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image5.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image6.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image7.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image8.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image9.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image10.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image11.jpg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~/Images/image12.jpg" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/flexslider.css" type="text/css" rel="stylesheet"/>
+<script src="~/Scripts/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.flexslider').flexslider({
+        animation: "fade",
+        animationLoop: false,
+        itemMargin: 0,
+        pausePlay: true,
+        start: function(slider){
+            $('body').removeClass('loading');
+            $('.flex-prev').text('');
+            $('.flex-next').text('');
+        }
+      });
+    });
+</script>

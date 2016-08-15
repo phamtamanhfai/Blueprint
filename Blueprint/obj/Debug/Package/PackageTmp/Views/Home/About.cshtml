@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .enquiremain ul {
+        list-style: none;
+    }
+
+    .enquiremain ul li{
+        width: 100%;
+        float: left;
+        font-size: 14px;
+        color: #333;
+        font-family: 'open_sansregular';
+        background: url(../Images/crc.png) no-repeat left 11px;
+        padding: 6px 0 6px 15px;
+    }
+
+    h3 {
+        margin-top: 40px;
+        color: #003366;
+    }
+
+    .contact li {
+        font-size:20px !important;
+    }
+
+    .contact span {
+        color: #003366;
+    }
+
+    .col-my-3 {
+        width:100%;
+        height:100px;
+        overflow:hidden;
+        background-color:#fff;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        transition: all 300ms ease-in-out;
+        margin: 5px;
+    }
+
+        .col-my-3:hover {
+            background-color: #000;
+        }
+
+        .col-my-3:hover .ca-icon{
+            color: #f900b0;
+            font-size: 120px;
+            opacity: 0.2;
+            left: -20px;
+            transform: rotate(20deg);
+        }
+
+        .col-my-3:hover .ca-main{
+            color: #f900b0;
+            opacity: 0.8;
+        }
+
+        .col-my-3:hover .ca-sub{
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .col-my-3 a {
+            text-align: left;
+            display: block;
+            width: 100%;
+            height: 100%;
+            position:relative;
+            color:#333;
+        }
+
+    .ca-icon {
+        font-family: WebSymbolsRegular;
+        font-size: 30px;
+        text-shadow: 0px 0px 1px #333;
+        line-height: 90px;
+        position: absolute;
+        width: 90px;
+        left: 20px;
+        text-align: center;
+        transition: all 300ms linear;
+    }
+
+    .ca-content{
+        position: absolute;
+        left: 110px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .ca-main{
+        font-size: 25px;
+        transition: all 300ms linear;
+        margin: 0!important;
+        color: #003366;
+    }
+
+    .ca-sub{
+        font-size: 14px;
+        color: #666;
+        transition: all 300ms linear; 
+        margin: 0 !important;
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Về chúng tôi</span>
+        </div>
+        <div class="enquiremain">
+            <div style="margin-bottom:30px;width:100%;float:left;">
+                <div class="col-my-3">
+                    <a href="#1">
+                        <span class="ca-icon">&#0116;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Lý do thành lập</h2>
+                            <h3 class="ca-sub">Phục vụ nhu cầu của bạn</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-my-3">
+                    <a href="#2">
+                        <span class="ca-icon">&#0089;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Tại sao bạn nên học ở TOEIC PLUS ?</h2>
+                            <h3 class="ca-sub">Chất lượng tuyệt hảo</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-my-3">
+                    <a href="#3">
+                        <span class="ca-icon">&#0161;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Giáo viên của TOEIC PLUS</h2>
+                            <h3 class="ca-sub">Đội ngũ kinh nghiệm</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-my-3">
+                    <a href="#4">
+                        <span class="ca-icon">&#0083;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Cam kết từ TOEIC PLUS</h2>
+                            <h3 class="ca-sub">Tận tâm, tận lực</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-my-3">
+                    <a href="#5">
+                        <span class="ca-icon">&#0088;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Sứ mệnh của TOEIC PLUS</h2>
+                            <h3 class="ca-sub">Nuôi dưỡng nhân tài</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-my-3">
+                    <a href="#5">
+                        <span class="ca-icon">&#124;</span>
+                        <div class="ca-content">
+                            <h2 class="ca-main">Liên hệ</h2>
+                            <h3 class="ca-sub">Sẵn sàng kết nối</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <h3 id="1">Lý do thành lập</h3>
+            <div>
+                <p>Cơ Sở Luyện Thi TOEIC và Tiếng Anh Giao Tiếp TOEIC PLUS chuyên đào tạo luyện thi TOEIC, tiếng Anh giao tiếp 2 trong 1. Lớp học chuyên sâu, số lượng học viên giới hạn đảm bảo chất lượng 100%!</p>
+                <p>Xuất phát từ những nghiên cứu về trình độ tiếng Anh của người Việt trong tiến trình hội nhập chúng tôi thấy rằng: Hầu hết những người Việt học tiếng Anh đều chỉ đi thi TOEIC để lấy chứng chỉ mà không phát triển nhiều về khả năng giao tiếp. Vì vậy chúng tôi đã tạo ra: <b>Khóa học TOEIC giao tiếp 2 trong 1.</b></p>
+                <p>Khóa học đào tạo kết hợp cả kiến thức TOEIC và khả năng giao tiếp. Giúp người học vừa có thể thi TOEIC với thành tích cao mà vẫn có khả năng giao tiếp tiếng Anh như người bản địa.</p>
+            </div>
+
+            <h3 id="2">Tại sao bạn nên học ở TOEIC PLUS ?</h3>
+            <div>
+                <p>Đến với <b>Khóa học TOEIC giao tiếp 2 trong 1</b> học viên sẽ được trải nghiệm một không gian học tập hoàn toàn mới với những điều tuyệt vời:</p>
+                <ul style="height:175px">
+                    <li>Lớp học chỉ 5 đến 10 người, số lượng lý tưởng cho những người học tiếng Anh.</li>
+                    <li>Được học tập kiến thức từ một chuyên gia TOEIC với thành tích cao và nhiều năm kinh nghiệm giảng dạy.</li>
+                    <li>Được tiếp xúc với một giáo trình hoàn toàn mới, phát triển song song 2 kỹ năng: TOEIC và giao tiếp.</li>
+                    <li>Được học tập với một mức phí tối thiểu, chỉ bằng ½ - ⅓ trung tâm.</li>
+                    <li>Hệ thống cơ sở vật chất đầy đủ và tiện nghi.</li>
+                </ul>
+            </div>
+
+            <h3 id="3">Giáo viên của TOEIC PLUS</h3>
+            <div>
+                <p><b>Khóa học TOEIC giao tiếp 2 trong 1</b> được đào tạo chính bởi thầy giáo Phạm Xuân Công, chuyên gia TOEIC với nhiều năm kinh nghiệm giảng dạy.</p>
+                <p>Thầy là người từng đạt điểm thi TOEIC 990/990, giải nhì kỳ thi tỉnh môn Tiếng Anh Trung học phổ thông, tốt nghiệp top 5 khoa Tiếng Anh trường Đại Học Ngoại Ngữ Huế, và là một trong những giáo viên tiếng Anh kỳ cựu của Trường Ngoại ngữ Không Gian, một trong những trung tâm ngoại ngữ uy tín nhất Thành phố Hồ Chí Minh.</p>
+            </div>
+
+            <h3 id="4">Cam kết từ TOEIC PLUS</h3>
+            <div>
+                <p>Học viên đến với <b>Khóa học TOEIC giao tiếp 2 trong 1</b> đều là một người bạn. Vì vậy mang lại điều tốt nhất cho mọi người chính là nhiệm vụ, trách nhiệm của chúng tôi.</p>
+                <p><b>Khóa học TOEIC giao tiếp 2 trong 1</b> cam kết hoàn tiền 100% cho tất cả những ai học tập mà không đạt hiệu quả.</p>
+            </div>
+
+            <h3 id="5">Sứ mệnh của TOEIC PLUS</h3>
+            <div>
+                <p>TOEIC PLUS cam kết đơn vị tiên phong trong việc kết hợp giữa luyện thi TOEIC và tiếng Anh giao tiếp. Góp phần vào công cuộc đào tạo thế hệ trẻ Việt Nam giỏi tiếng Anh, năng động, sáng tạo, đáp ứng hiệu quả nhu cầu xã hội trong thời kỹ hội nhập kinh tế quốc tế.</p>
+                <p>TOEIC PLUS rất vui vì nhận được sự yêu mến và ủng hộ của các học viên. Chúng tôi luôn sẵn lòng đào tạo và giúp đỡ các học viên để đạt được trình độ tốt nhất.</p>
+            </div>
+
+            <span id="6"><u><i>Mọi chi tiết xin liên hệ:</i></u></span>
+            <ul class="contact">
+                <li style="color:#CC0000"><b>Thầy Xuân Công</b></li>
+                <li><b>ĐT:</b> <span>0982830711</span></li>
+                <li><b>Email:</b> <span>xuancongspk4d@gmail.com</span></li>
+                <li><b>Skype:</b> <span>xuancongspk4d</span></li>
+            </ul>
+        </div>
+    </div>
+
+</section>

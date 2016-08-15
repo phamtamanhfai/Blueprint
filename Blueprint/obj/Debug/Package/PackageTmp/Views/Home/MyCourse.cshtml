@@ -1,0 +1,128 @@
+﻿@model Blueprint.Models.CoursesItem
+@using Blueprint.Utils
+@{
+    ViewBag.Title = "MyCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .avartar {
+        max-width:100%;
+        position:relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom:30px;
+    }
+
+    h4 {
+        margin-top: 40px;
+        color: #003366;
+    }
+
+    h5 {
+        width:100%;
+        float:left;
+        font-size:17px;
+        font-weight:bold;
+        color: #3b5998;
+    }
+
+    p {
+        white-space:pre-wrap;
+    }
+
+    .separator {
+        height:100%;
+        width:0px;
+        position:absolute;
+        right:30px;
+        top: 0PX;
+        border-left: 1px solid black;
+    }
+
+    .comflex {
+        position:relative;
+        padding-right:99px;
+    }
+
+    .bullet {
+        width: 20px;
+        margin-left: 15px;
+    }
+    @@media only screen and (max-width: 990px) {
+        .separator{display:none}
+        .comflex{padding-right:15px !important}    
+    }
+</style>
+<div id="fb-root"></div>
+<script>
+    $(document).ready(function () {
+        $('div.fb-comments').attr('data-href', location.href);
+        (function (d, s, id) {
+
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5&appId=868674296578792";
+            fjs.parentNode.insertBefore(js, fjs);
+
+        }(document, 'script', 'facebook-jssdk'));
+    })
+    
+    $(document).ready(function () {
+        var html = $('.content').html()
+        var newHtml = html.split('+').join('<img src="/Images/correct.png" class="bullet"/>')
+        $('.content').html(newHtml)
+    })
+</script>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="fb-like"
+             data-share="true"
+             data-width="450"
+             data-show-faces="true">
+        </div>
+        <div class="aboutheading" style="margin-bottom:20px">
+            <div class="col-my-6">
+                <span>@Model.Title</span>
+            </div>
+            
+            <div class="col-my-6">
+                <div class="fly-button return">
+                    <a href="@Url.Action("Course", "Home", new { @title = ""})"><span>Xem khóa học</span></a>
+                </div>
+            </div>
+
+            <div class="fly-button-small">
+                <a href="@Url.Action("Course", "Home", new { @title = ""})"><span>Xem khóa học</span></a>
+            </div>
+        </div>
+        <div class="enquiremain">
+            <div class="col-md-8 comflex" style="position:relative;padding-right:99px">
+                <img class="avartar" src="@("/Upload/Courses/" + Model.Image)" />
+                <h4>Đối tượng</h4>
+                <p style="line-height:25px">@Model.Subject</p>
+                <h4>Thời lượng</h4>
+                <p>@Model.Duration</p>
+                <h4>Nội dung chương trình</h4>
+                <p class="content" style="line-height:40px">@Model.Content</p>
+                <div class="separator"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="button">
+                    <a href="@Url.Action("Enquire", "Home")">Đăng ký ngay</a>
+                    <a href="@Url.Action("Test", "Home")">Làm kiểm tra</a>
+                </div>
+                
+                <div style="max-height:430px;overflow:auto;width:100%;margin-top:45px;float:left">
+                    <h5>Ý kiến của bạn</h5>
+                    <div class="fb-comments" data-href="" data-width="100%" data-numposts="5" data-order-by="reverse_time"></div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</section>
+

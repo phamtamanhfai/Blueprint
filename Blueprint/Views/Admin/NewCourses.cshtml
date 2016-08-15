@@ -1,0 +1,77 @@
+﻿@model Blueprint.Models.CoursesItem
+@{
+    ViewBag.Title = "NewCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row span {
+        margin: 0 0 20px 20px;
+        color: #1466B5;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .validate-message {
+        width: 100%;
+        float: left;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+
+    .preview {
+        position: absolute;
+        width:200px;
+        height: 200px;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Tạo khóa học mới</span>
+        </div>
+        <div class="enquiremain">
+            <div class="validate-message"></div>
+            @using (Html.BeginForm("AddNewCourses", "Admin", FormMethod.Post, new { @id = "frm_Courses", enctype = "multipart/form-data" }))
+            {
+                <div class="row" style="height:275px">
+                    <span>Ảnh minh họa</span>
+                    <input style="display:none" type="file" name="image" id="image" accept="image/*" />
+                    <label for="image" title="Chọn ảnh"><img class="action_icon" src="~/Images/plus-icon.png" /></label> <br />
+                    <img class="preview" src="~/Images/cs.jpg"/>
+                </div>
+                <div class="row">
+                    <span>Tiêu đề khóa học</span>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "txtTitle", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Đối tượng</span>
+                    @Html.TextAreaFor(model => model.Subject, new {  @id = "txtSubject", @class = "textbox", @rows = "5" })
+                </div>
+                <div class="row">
+                    <span>Thời lượng</span>
+                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @id = "txtDuration", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Nội dung chương trình</span>
+                    @Html.TextAreaFor(model => model.Content, new { @id = "txtContent", @class = "textbox", @rows = "10" })
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <a class="fakea">Thêm mới</a>
+        </div>
+
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Admin", new { k = "+RT8ClJHu+XsuPTmtIr7hA==" })');
+    })
+</script>

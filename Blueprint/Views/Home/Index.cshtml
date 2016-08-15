@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/animate.css")
+<style>
+
+    .full-fill {
+        width: 100%;
+        height: 525px;
+        overflow: hidden;
+    }
+    .main-slider, .slider {
+        margin-top: -11px;
+        float: left;
+    }
+
+    .title {
+        font-size:25px;
+        margin: 10px 0;
+        display: block;
+    }
+
+    .right-link {
+        float:right;
+        line-height: 41px;
+        background-color: #333;
+        color: white;
+        padding: 0 30px;
+        border-radius: 11px;
+        font-weight: bold;
+    }
+
+        .right-link:hover {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+        }
+
+    .quizlet {
+        list-style-type: none;
+        padding: 0;
+        height:235px;
+    }
+
+    .quizlet li{
+        font-size: 38px;
+        line-height: 70px;
+        text-align:center;
+        font-weight:bold;
+    }
+
+    .circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 99%;
+        margin: auto;
+        text-align:center;
+    }
+
+    p.header {
+        font-size:20px;
+        text-align:center;
+        margin: 10px;
+    }
+
+    p.content {
+        text-align:center;
+        line-height: 35px;
+        color: #B0B0B0;
+        margin:10px;
+    }
+
+    .shadow-button {
+        width: 125px;
+        padding:8px;
+        margin:auto;
+        border: 2px solid white;
+        border-radius: 10px;
+        color:white;
+        display:block;
+        text-align:center;
+    }
+
+        .shadow-button:hover {
+            text-decoration:none;
+            color:#6CEDF6;
+            border-color: #6CEDF6;
+        }
+</style>
+
+<div class="main-slider full-fill">
+    <div class="banner full-fill">
+        <div class="slider full-fill">
+            <div class="flexslider full-fill">
+                <ul class="slides full-fill">
+                    <li class="full-fill">
+                        <a href="#" class="full-fill">
+                            <img src="~/Images/image1.jpg" />
+                        </a>
+                    </li>
+                    <li class="full-fill">
+                        <a href="#" class="full-fill">
+                            <img src="~/Images/image2.jpg" />
+                        </a>
+                    </li>
+                    <li class="full-fill">
+                        <a href="#" class="full-fill">
+                            <img src="~/Images/image6.jpg" />
+                        </a>
+                    </li>
+                    <li class="full-fill">
+                        <a href="#" class="full-fill">
+                            <img src="~/Images/image7.jpg" />
+                        </a>
+                    </li>
+                    <li class="full-fill">
+                        <a href="#" class="full-fill">
+                            <img src="~/Images/image12.jpg" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dark-shadow" style="margin-top:-11px">
+    <div class="wrapperin"><span class="title">Better English - Brighter Future</span></div>
+</div>
+
+<div class="cloud">
+    <div class="wrapperin">
+        <div style="height:auto;float:left;width:100%;margin-bottom: 20px">
+            <div class="col-my-6">
+                <div style="font-size:30px">KHÓA HỌC <span style="color:#333333">PHỔ BIẾN</span></div>
+            </div>
+            <div class="col-my-6">
+                <a class="right-link" href="@Url.Action("Course", "Home")">Xem tất cả</a>
+            </div>
+        </div>
+        
+        @Html.Action("RenderCourses", "Home")
+    </div>
+</div>
+
+<div class="fog">
+    <div class="wrapperin">
+        <h3 class="animate" id="bounce1" style="width:30%;min-width:170px">VỀ CHÚNG TÔI</h3><br/>
+        <p class="animate" id="bounce2">Xuất phát từ những nghiên cứu về trình độ tiếng Anh của người Việt trong tiến trình hội nhập chúng tôi thấy rằng: Hầu hết những người Việt học tiếng Anh đều chỉ đi thi TOEIC để lấy chứng chỉ mà không phát triển nhiều về khả năng giao tiếp. Vì vậy chúng tôi đã tạo ra: Khóa học TOEIC giao tiếp 2 trong 1. Khóa học đào tạo kết hợp cả kiến thức TOEIC và khả năng giao tiếp. Giúp người học vừa có thể thi TOEIC với thành tích cao mà vẫn có khả năng giao tiếp tiếng Anh như người bản địa.</p>
+    </div>
+</div>
+
+<div class="cloud">
+    <div class="wrapperin">
+        <div class="col-md-8">
+            <h2 class="animate" id="bounce3">PHẦN MỀM TỪ VỰNG QUIZLET</h2>
+            <p class="animate" id="bounce4">Là một công cụ học từ vựng thông minh đang được sử dụng bởi học viên và giáo viên khắp trên toàn thế giới. Chương trình này sẽ giúp bạn học thuộc từ mới một cách dễ dàng, thú vị và hiệu quả nhất.</p>
+            <div class="col-md-6 four animate">
+                <h3><i class="fa fa-bolt"></i>DỄ SỬ DỤNG</h3>
+                <p>Bạn chỉ mất vài giây để đăng ký và ít phút để học cách sử dụng và có thể học hàng ngàn từ vựng một cách dễ dàng</p>
+            </div>
+            <div class="col-md-6 four animate">
+                <h3><i class="fa fa-money"></i>HOÀN TOÀN MIỄN PHÍ</h3>
+                <p>Bạn sẽ không phải mất một khoản phí nào để sử dụng công cụ tuyệt vời này</p>
+            </div>
+            <div class="col-md-6 four animate">
+                <h3><i class="fa fa-key"></i>HIỆU QUẢ CAO</h3>
+                <p>Với Quizlet một ngày bạn có thể học thuộc hàng chục từ mới mà vẫn có thể ghi nhớ trong một thời gian dài</p>
+            </div>
+            <div class="col-md-6 four animate">
+                <h3><i class="fa fa-globe"></i>HỌC MỌI LÚC MỌI NƠI</h3>
+                <p>Bạn có thể học trên máy tính, điện thoại Ipad mọi lúc và mọi nơi bạn muốn</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img class="animate" style="width:240px;margin:auto;display:block;margin-bottom:40px;" src="~/Images/quizlet.png" />
+            <ol class="quizlet animate">
+                <li style="color:red">1. Trực quan</li>
+                <li style="color:#0058a9">2. Phong phú</li>
+                <li style="color:#008105">3. Gần gũi</li>
+            </ol>
+            <div class="button animate">
+                <a href="https://quizlet.com/xuancongspk4d" target="_blank">Khám phá ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fog" style="margin-bottom:0">
+    <div class="wrapperin">
+        <h3 class="animate" id="bounce5" style="width:70%;min-width:280px;">GHI DANH NGAY ĐỂ CHINH PHỤC TIẾNG ANH CÙNG TOEIC PLUS</h3><br />
+        <div class="button animate" id="bounce6">
+            <a href="@Url.Action("Enquire","Home")">Ghi danh</a>
+        </div>
+    </div>
+</div>
+
+<div class="dark-shadow" style="padding:20px;margin-bottom:0">
+    <div class="wrapperin">
+        <div id="bounce7" class="col-md-4 animate" style="margin:30px 0">
+            <div class="circle"><i style="color:#5D96A5" class="fa fa-paper-plane-o fa-5x" aria-hidden="true"></i></div>
+            <p class="header">HỌC PHÍ THẤP</p>
+            <p class="content">Học phí tại TOEIC PLUS thấp hơn rất nhiều so với học phí tại các trung tâm tiếng Anh và có thể đóng theo từng tháng nên sẽ không còn là nỗi lo của học viên khi đến với TOEIC PLUS.</p>
+            <a href="@Url.Action("Enquire","Home")" class="shadow-button">XEM THÊM</a>
+        </div>
+
+        <div class="col-md-4 animate" style="margin:30px 0">
+            <div class="circle"><i style="color:#5D96A5" class="fa fa-angellist fa-5x" aria-hidden="true"></i></div>
+            <p class="header">CHẤT LƯỢNG CAO</p>
+            <p class="content">Với sỉ số lớp chỉ từ 5 - 10 học viên, hệ thống giáo trình được biên soạn kỹ lưỡng và phương pháp giảng dạy tiên tiến hiện đại. 100% học viên khi theo học tại TOEIC PLUS đều hài lòng.</p>
+            <a href="@Url.Action("Enquire","Home")" class="shadow-button">XEM THÊM</a>
+        </div>
+
+        <div class="col-md-4 animate" style="margin:30px 0">
+            <div class="circle"><i style="color:#5D96A5" class="fa fa-universal-access fa-5x" aria-hidden="false"></i></div>
+            <p class="header">GIÁO VIÊN GIỎI</p>
+            <p class="content">Giáo viên tại TOEIC PLUS là thầy Phạm Xuân Công, TOEIC 990/990 người có nhiều năm kinh nghiệm giảng dạy tiếng Anh giao tiếp và TOEIC tại các trong tâm tiếng Anh lớn ở Sài Gòn.</p>
+            <a href="@Url.Action("Enquire","Home")" class="shadow-button">XEM THÊM</a>
+        </div>
+    </div>
+</div>
+
+<div class="fog">
+    <div class="wrapperin">
+        <h3 class="animate" id="bounce8" style="width:30%;min-width:285px;">LIÊN HỆ VỚI CHÚNG TÔI</h3><br />
+        <div class="button animate" id="bounce9">
+            <a href="@Url.Action("About","Home")">Chi tiết</a>
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/flexslider.css" type="text/css" rel="stylesheet"/>
+<script src="~/Scripts/jquery.flexslider-min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.post('@Url.Action("Whatever", "Home", new { k = "bhNdN35+dNyUgDryD5k8rg==" })');
+    })
+</script>

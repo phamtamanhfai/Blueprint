@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Các khóa học tại TOEIC PLUS</span>
+        </div>
+        <div class="enquiremain">
+            <div class="enquiremainheading">Cùng khám phá nhé</div>
+            <span style="display:block;margin-bottom:20px">Hãy lựa chọn khóa học phù hợp với yêu cầu của bạn</span>
+            @Html.Action("RenderCourses", "Home")
+        </div>
+    </div>
+</section>
+

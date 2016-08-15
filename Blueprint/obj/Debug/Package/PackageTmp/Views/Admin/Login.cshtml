@@ -1,0 +1,146 @@
+﻿@model Blueprint.Models.UserLoginRequest
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .login_container {
+        width: 300px;
+        height: 400px;
+        margin: 60px auto;
+    }
+
+    .icon {
+        position: relative;
+        width: 80px;
+        margin: 15px auto;
+    }
+
+    .callout {
+        position:absolute;
+        width: 350px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #245D91;
+        border-radius: 2px;
+        padding: 0 10px;
+        text-align: center;
+        color: #245D91;
+        font-weight: bold;
+    }
+        
+        .callout span {
+            height: 40px;
+            overflow:hidden;
+        }
+
+    .callout::before {
+	    content: "";
+	    width: 17px;
+	    height: 10px;
+	    border: 0.8em solid transparent;
+	    position: absolute;
+    }
+
+    @@media (min-width:850px) {
+        .callout {
+            left:85px;
+            top: -10px;
+        }
+
+        .callout::before {
+            border-right: 10px solid #245D91;
+            left:-21px;
+            top:24%;
+        }
+    }
+
+    @@media (max-width:850px) {
+
+        .callout {
+            left:-138px;
+            top: -53px;
+        }
+
+        .callout::before {
+            border-top: 10px solid #245D91;
+            left:165px;
+            top:100%;
+        }
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Đăng nhập</span>
+        </div>
+        <div class="enquiremain">
+            <div class="login_container">
+                <div class="icon">
+                    <div class="callout">
+                        <span>Xin chào ! Đăng nhập để truy cập !</span>
+                    </div>
+                    <img src="~/Images/icon-profile.png" width="80" height="80" />
+                </div>
+                @using (Html.BeginForm("CheckLogin", "Admin", FormMethod.Post, new { @id = "frm_Login" }))
+                {
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @id = "txtUsername", @class = "textbox", @placeholder = "Tên đăng nhập" } })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @id = "txtPassword", @class = "textbox", @placeholder = "Mật khẩu" } })
+                    <div class="button" style="width:100%">
+                        <a style="width:100%">Đăng nhập</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ('@TempData["Msg"]') {
+            $('.callout span').css("width", "0px").text('@Html.Raw(TempData["Msg"])').animate({ "width": "100%" }, 1000)
+        }
+
+        $('.button a').click(function () {
+            processPost();
+        })
+
+        $('form').keydown(function (e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                processPost();
+            }
+        })
+
+
+        function processPost() {
+            if (isValid()) {
+                $('#frm_Login').submit();
+            }
+        }
+
+        function isValid() {
+            if ($('#txtUsername').val() == '') {
+                $('.callout span').css("width", "0px").text('Ủa, thiếu tên đăng nhập !').animate({ "width": "100%" }, 1000)
+                $('#txtUsername').focus();
+                $('#txtUsername').addClass('field_error');
+                return false;
+            } else {
+                $('#txtUsername').removeClass('field_error');
+            }
+
+            if ($('#txtPassword').val() == '') {
+                $('.callout span').css("width", "0px").text('Ồ, thiếu mật khẩu rồi !').animate({ "width": "100%" }, 1000)
+                $('#txtPassword').focus();
+                $('#txtPassword').addClass('field_error');
+                return false;
+            } else {
+                $('#txtPassword').removeClass('field_error');
+
+            }
+            return true;
+        }
+    })
+</script>

@@ -1,0 +1,146 @@
+﻿@model Blueprint.Models.CoursesItem
+@{
+    ViewBag.Title = "NewCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .row span {
+        margin: 0 0 20px 20px;
+        color: #1466B5;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .validate-message {
+        width: 100%;
+        float: left;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+
+    .preview {
+        position: absolute;
+        width:200px;
+        height: 200px;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+</style>
+
+<section class="bodymain">
+    <div class="wrapperin">
+        <div class="aboutheading">
+            <span>Tạo khóa học mới</span>
+        </div>
+        <div class="enquiremain">
+            <div class="validate-message"></div>
+            @using (Html.BeginForm("AddNewCourses", "Admin", FormMethod.Post, new { @id = "frm_Courses", enctype = "multipart/form-data" }))
+            {
+                <div class="row" style="height:275px">
+                    <span>Ảnh minh họa</span>
+                    <input style="display:none" type="file" name="image" id="image" accept="image/*" />
+                    <label for="image" title="Chọn ảnh"><img class="action_icon" src="~/Images/plus-icon.png" /></label> <br />
+                    <img class="preview" src="~/Images/cs.jpg"/>
+                </div>
+                <div class="row">
+                    <span>Tiêu đề khóa học</span>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @id = "txtTitle", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Đối tượng</span>
+                    @Html.TextAreaFor(model => model.Subject, new {  @id = "txtSubject", @class = "textbox", @rows = "5" })
+                </div>
+                <div class="row">
+                    <span>Thời lượng</span>
+                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @id = "txtDuration", @class = "textbox" } })
+                </div>
+                <div class="row">
+                    <span>Nội dung chương trình</span>
+                    @Html.TextAreaFor(model => model.Content, new { @id = "txtContent", @class = "textbox", @rows = "10" })
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <a class="fakea">Thêm mới</a>
+        </div>
+
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#image").change(function (e) {
+            var input = this;
+            var filename = e.target.value.split('\\').pop();
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        })
+
+        $('.button a').click(function () {
+            processPost();
+        })
+
+        $('form').keydown(function (e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                processPost();
+            }
+        })
+
+        function processPost() {
+            if (isValid()) {
+                $('#frm_Courses').submit();
+            }
+        }
+
+        function isValid() {
+            if ($('#txtTitle').val() == '') {
+                $('#txtTitle').focus();
+                $('#txtTitle').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập tiêu đề.');
+                return false;
+            } else {
+                $('#txtTitle').removeClass('field_error');
+            }
+
+            if ($('#txtSubject').val() == '') {
+                $('#txtSubject').focus();
+                $('#txtSubject').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập đối tượng.');
+                return false;
+            } else {
+                $('#txtSubject').removeClass('field_error');
+
+            }
+
+            if ($('#txtDuration').val() == '') {
+                $('#txtDuration').focus();
+                $('#txtDuration').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập thời lượng.');
+                return false;
+            } else {
+                $('#txtDuration').removeClass('field_error');
+
+            }
+
+            if ($('#txtContent').val() == '') {
+                $('#txtContent').focus();
+                $('#txtContent').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập nội dung.');
+                return false;
+            } else {
+                $('#txtContent').removeClass('field_error');
+
+            }
+            return true;
+        }
+    })
+</script>

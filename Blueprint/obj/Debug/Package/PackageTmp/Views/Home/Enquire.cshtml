@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "Enquire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .col-my-6 {
+        padding-right:15px;
+    }
+
+    .validate-message {
+        width:100%;
+        min-height:20px;
+        padding: 0 0 20px 0;
+        color: red;
+    }
+</style>
+<section class="bodymain">
+    <div class="wrapperin">
+        <img src="~/Images/poster.jpg" style="width:100%"/>
+        <div class="aboutheading">
+            <span>Ghi danh lớp TOEIC PLUS</span>
+        </div>
+        <div class="enquiremain">
+            <div class="enquiremainheading">Khóa học luyện thi TOEIC và tiếng Anh giao tiếp</div>
+            <div class="validate-message"></div>
+            <form action="@Url.Action("PostEnquire", "Home")" method="post">
+                <div class="col-my-6">
+                    <input type="text" placeholder="Họ tên" class="textbox" id="txtName" name="Name" />
+                    <input type="text" placeholder="Địa chỉ" class="textbox" id="txtAddress" name="Address" />
+                    <input type="text" placeholder="Điện thoại" class="textbox" id="txtPhone" name="Phone" />
+                    <input type="email" placeholder="Email" class="textbox" id="txtEmail" name="Email" />
+                </div>
+
+                <div class="col-my-6">
+                    <input type="date" title="Ngày sinh" class="textbox" id="txtBirthDate" name="BirthDate" />
+                    <select class="textbox" id="cboCourse" name="CourseID">
+                        <option value="-1">---Chọn khóa học---</option>
+                        @foreach (var item in ViewBag.Courses as List<Blueprint.Models.CoursesItem>)
+                        {
+                            <option value="@item.ID">@item.Title</option>
+                        }
+                    </select>
+                    <textarea class="textbox" placeholder="Mục đích của bạn khi học tiếng Anh là gì?" style="height:90px" id="txaPurpose" name="Purpose"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="button">
+            <a class="fakea submit">Ghi danh</a>
+        </div>
+    </div>
+
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if('@TempData["Msg"]' != ''){
+            toastr.success('@TempData["Msg"]')
+        }
+
+        $('.submit').click(function () {
+            if (isValid()) {
+                $('form').submit();
+            }
+        });
+
+        function isValid() {
+            if ($('#txtName').val() == '') {
+                $('#txtName').focus();
+                $('#txtName').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Họ tên.').show();
+                return false;
+            } else {
+                $('#txtName').removeClass('field_error');
+            }
+
+            if ($('#txtAddress').val() == '') {
+                $('#txtAddress').focus();
+                $('#txtAddress').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Địa chỉ.').show();
+                return false;
+            } else {
+                $('#txtAddress').removeClass('field_error');
+            }
+
+            if ($('#txtPhone').val() == '') {
+                $('#txtPhone').focus();
+                $('#txtPhone').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Số điện thoại.').show();
+                return false;
+            } else {
+                $('#txtPhone').removeClass('field_error');
+            }
+
+            if ($('#txtEmail').val() == '') {
+                $('#txtEmail').focus();
+                $('#txtEmail').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Email.').show();
+                return false;
+            } else {
+                $('#txtEmail').removeClass('field_error');
+            }
+
+            var pattern = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (!pattern.test($('#txtEmail').val())) {
+                $('#txtEmail').focus();
+                $('#txtEmail').addClass('field_error');
+                $('.validate-message').text('Email không hợp lệ.').show();
+                return false;
+            } else {
+                $('#txtEmail').removeClass('field_error');
+            }
+
+            if ($('#txtBirthDate').val() == '') {
+                $('#txtBirthDate').focus();
+                $('#txtBirthDate').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Ngày sinh.').show();
+                return false;
+            } else {
+                $('#txtBirthDate').removeClass('field_error');
+            }
+
+            if ($('#cboCourse').val() == '-1') {
+                $('#cboCourse').focus();
+                $('#cboCourse').addClass('field_error');
+                $('.validate-message').text('Bạn chưa chọn khóa học.').show();
+                return false;
+            } else {
+                $('#cboCourse').removeClass('field_error');
+            }
+
+            if ($('#txaPurpose').val() == '') {
+                $('#txaPurpose').focus();
+                $('#txaPurpose').addClass('field_error');
+                $('.validate-message').text('Bạn chưa nhập Mục đích học.').show();
+                return false;
+            } else {
+                $('#txaPurpose').removeClass('field_error');
+            }
+            return true;
+        }
+    });
+</script>
