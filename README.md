@@ -1,0 +1,2 @@
+# Blueprint
+Lexica English
